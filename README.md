@@ -1,16 +1,16 @@
-# project_mpsp
+# Projeto MPSP
 
-A new Flutter project.
+Aplicação Mobile desenvolvida em Flutter
 
-## Getting Started
+## 💻 Faculdade 
 
-This project is a starting point for a Flutter application.
+Faculdade de informática e administração paulista 
 
-A few resources to get you started if this is your first Flutter project:
+## :busts_in_silhouette: Grupo
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Matheus Lopes de Barros 
+- Julia de Alvarenga Monaco 
+- Anna Carolina Neves Favaretto  
+- Ahalan Bessa Windson 
+- Felipe Menezes de Paiva 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
