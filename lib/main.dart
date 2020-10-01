@@ -1,5 +1,6 @@
 import 'package:project_mpsp/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:project_mpsp/screens/pagInicial.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: Login(),
+      home: MaterialApp(initialRoute: '/login', routes: {
+        '/login': (context) => Login(),
+        '/menu': (context) => PagInicial(),
+      }),
     );
   }
 }

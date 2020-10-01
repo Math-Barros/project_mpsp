@@ -1,5 +1,6 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:project_mpsp/models/usuario_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   // Instancia do SQFLite Database
@@ -26,11 +27,11 @@ class DatabaseHelper {
 
   Future<Database> _createDatabase() async {
     String databasesPath = await getDatabasesPath();
-    String dbPath = join(databasesPath, 'acesso.db');
+    String dbPath = join(databasesPath, 'portal_app.db');
 
     var database = await openDatabase(
       dbPath,
-      version: 1,
+      version: 2,
       onCreate: _createTables,
     );
 
@@ -38,30 +39,20 @@ class DatabaseHelper {
   }
 
   void _createTables(Database database, int version) async {
-    // Criando as tabelas
+    // Criando a tabela de Cursos
     await database.execute(
       '''
-      CREATE TABLE ProvaModel (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        ano INTEGER,
-        curso TEXT,
-        turma TEXT,
-        disciplina TEXT,
-        data TEXT,
-        tema TEXT
-      )
+       CREATE TABLE  UsuarioModel(
+        cpf TEXT PRIMARY KEY,
+        nome TEXT,
+        senha TEXT NOT NULL
+      );
       ''',
     );
 
-    await database.execute(
-      '''
-      CREATE TABLE AlunoModel (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        rm INTEGER,
-        nome TEXT,
-        status TEXT
-      )
-      ''',
-    );
+    await database.insert("UsuarioModel",
+        new UsuarioModel(cpf: "123", nome: "Flavio", senha: "123").toMap());
+    await database.insert("UsuarioModel",
+        new UsuarioModel(cpf: "456", nome: "Pedro", senha: "123").toMap());
   }
 }

@@ -51,12 +51,7 @@ class _Cadastro extends State<Cadastro> {
                   fontSize: 20,
                 ),
               ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Insira um nome válido';
-                }
-                return null;
-              },
+
               onSaved: (value) {
                 usuarioModel.nome = value;
               },
@@ -80,14 +75,8 @@ class _Cadastro extends State<Cadastro> {
                 ),
               ),
 
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Insira um CPF válido!';
-                }
-                return null;
-              },
               onSaved: (value) {
-                usuarioModel.cpf = int.parse(value);
+                usuarioModel.cpf = value;
               },
               style: TextStyle(
                 fontSize: 20,
@@ -108,12 +97,6 @@ class _Cadastro extends State<Cadastro> {
                 ),
               ),
 
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Insira um email válido';
-                }
-                return null;
-              },
               onSaved: (value) {
                 usuarioModel.email = value;
               },
@@ -137,13 +120,6 @@ class _Cadastro extends State<Cadastro> {
                   fontSize: 20,
                 ),
               ),
-
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Insira uma senha válida';
-                }
-                return null;
-              },
               onSaved: (value) {
                 usuarioModel.senha = value;
               },
@@ -172,17 +148,16 @@ class _Cadastro extends State<Cadastro> {
               ),
               child: SizedBox.expand(
                 child: FlatButton(
-                  child: Text(
-                    "Cadastrar",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20,
+                    child: Text(
+                      "Cadastrar",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
-                    if (formKey.currentState.validate()) {
+                    onPressed: () {
                       formKey.currentState.save();
 
                       new UsuarioRepository().create(usuarioModel);
@@ -195,9 +170,7 @@ class _Cadastro extends State<Cadastro> {
                         context,
                         mensagem,
                       );
-                    }
-                  },
-                ),
+                    }),
               ),
             ),
             SizedBox(

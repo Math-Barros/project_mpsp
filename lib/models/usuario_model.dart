@@ -1,18 +1,16 @@
 import 'dart:convert';
 
 class UsuarioModel {
-  int id;
+  String cpf;
   String nome;
   String email;
   String senha;
-  int cpf;
 
   UsuarioModel({
-    this.id,
+    this.cpf,
     this.nome,
     this.email,
     this.senha,
-    this.cpf,
   });
 
   factory UsuarioModel.fromJson(String str) =>
@@ -21,17 +19,16 @@ class UsuarioModel {
   String toJson() => json.encode(toMap());
 
   factory UsuarioModel.fromMap(Map<String, dynamic> json) => UsuarioModel(
-        id: json["id"],
+        cpf: json["cpf"],
         nome: json["nome"],
         email: json["email"],
         senha: json["senha"],
-        cpf: json["cpf"],
       );
+
   Map<String, dynamic> toMap() => {
-        "id": id,
+        "cpf": cpf,
         "nome": nome,
         "email": email,
         "senha": senha,
-        "cpf": cpf,
       };
 }

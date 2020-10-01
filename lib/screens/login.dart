@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:project_mpsp/models/usuario_model.dart';
+import 'package:project_mpsp/repository/usuario_repository.dart';
 import 'package:project_mpsp/screens/cadastro.dart';
 import 'package:project_mpsp/screens/pagInicial.dart';
 import 'package:project_mpsp/screens/resetarSenha.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  Login({Key key}) : super(key: key);
+
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  UsuarioRepository usuarioRepository = UsuarioRepository();
+  UsuarioModel usuarioModel = UsuarioModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +51,7 @@ class Login extends StatelessWidget {
                   TextInputType.number, //Exibe somente os numeros do teclado
 
               //Configuracoes do campo
-              decoration: InputDecoration(
+              decoration: new InputDecoration(
                   labelText: "CPF", //Texto que ira aparecer
 
                   labelStyle: TextStyle(
@@ -45,6 +60,15 @@ class Login extends StatelessWidget {
                       fontSize: 20) //Cor, espessura e tamanho
 
                   ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Insira seu CPF para logar!';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                usuarioModel.cpf = value;
+              },
             ),
             //Espacamento entre inputs
             SizedBox(height: 10),
@@ -62,6 +86,15 @@ class Login extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Insira sua senha!';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                usuarioModel.senha = value;
+              },
             ),
 
             //Botao de recuperar senha
@@ -116,18 +149,43 @@ class Login extends StatelessWidget {
               ),
             ),
 
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PagInicial(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: RaisedButton(
+                child: Text("Entrar",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                color: Colors.pink,
+                onPressed: () {
+                  if (formKey.currentState.validate()) {
+                    formKey.currentState.save();
+
+                    var resultLogin = usuarioRepository.login(
+                        usuarioModel.cpf, usuarioModel.senha);
+
+                    resultLogin.then((usuario) {
+                      if (usuario == null) {
+                      } else {
+                        Navigator.pushNamed(
+                          context,
+                          '/menu',
+                          arguments: usuario,
+                        );
+                      }
+                    });
+                  } else {
+                    scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Não foi possível faze o login.',
+                        ),
                       ),
-                );
-              },
-              child: const Text('Acessar', style: TextStyle(fontSize: 20)),
+                    );
+                  }
+                },
+              ),
             ),
-            const SizedBox(height: 30),
           ],
         ),
       ),
