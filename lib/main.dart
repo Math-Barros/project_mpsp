@@ -1,5 +1,5 @@
-import 'package:project_mpsp/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:project_mpsp/screens/login_screen.dart';
 import 'package:project_mpsp/screens/pagInicial.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
       ),
       home: MaterialApp(initialRoute: '/login', routes: {
-        '/login': (context) => Login(),
+        '/login': (context) => LoginScreen(),
         '/menu': (context) => PagInicial(),
       }),
     );

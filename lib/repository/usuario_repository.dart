@@ -17,7 +17,6 @@ class UsuarioRepository {
       columns: [
         "cpf",
         "nome",
-        "email",
         "senha",
       ],
     );
@@ -34,7 +33,7 @@ class UsuarioRepository {
   Future<UsuarioModel> login(String cpf, String senha) async {
     var connection = await _databaseHelper.connection;
     var sqlCommand =
-        "SELECT * FROM UsuarioModel WHERE rm = '$cpf' and senha = '$senha'";
+        "SELECT * FROM UsuarioModel WHERE cpf = '$cpf' and senha = '$senha'";
 
     var results = await connection.rawQuery(sqlCommand);
     if (results.length > 0) {
