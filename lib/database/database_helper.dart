@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class DatabaseHelper {
   // Instancia do SQFLite Database

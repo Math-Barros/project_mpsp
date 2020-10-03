@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
 import 'package:project_mpsp/repository/usuario_repository.dart';
-import 'package:project_mpsp/screens/cadastro.dart';
+import 'package:project_mpsp/screens/cadastro_screen.dart';
 import 'package:project_mpsp/screens/resetarSenha.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Cadastro(),
+                                builder: (context) => CadastroScreen(),
                               ),
                             );
                           },
