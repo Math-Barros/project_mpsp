@@ -65,7 +65,7 @@ class DatabaseHelper {
         new UsuarioModel(
           cpf: "456",
           nome: "Pedro",
-          senha: "123",
+          senha: "456",
           email: "profpedro.araujo@fiap.com.br",
         ).toMap());
   }
