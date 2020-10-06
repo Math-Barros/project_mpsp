@@ -67,6 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Insira seu CPF para logar!';
+                          } else if (value != usuarioModel.cpf) {
+                            return 'Este CPF está invalido!';
                           }
                           return null;
                         },
@@ -91,6 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Digite sua senha para logar!';
+                          } else if (value != usuarioModel.senha) {
+                            return 'Sua senha está errada!';
                           }
                           return null;
                         },

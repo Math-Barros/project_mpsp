@@ -32,28 +32,41 @@ class DatabaseHelper {
 
     var database = await openDatabase(
       dbPath,
-      version: 2,
+      version: 3,
       onCreate: _createTables,
     );
-
     return database;
   }
 
   void _createTables(Database database, int version) async {
     // Criando a tabela de Cursos
+    await database.execute("DROP TABLE IF EXISTS UsuarioModel");
     await database.execute(
       '''
-       CREATE TABLE  UsuarioModel(
+       CREATE TABLE UsuarioModel(
         cpf TEXT PRIMARY KEY,
         nome TEXT,
-        senha TEXT NOT NULL
+        senha TEXT NOT NULL,
+        email TEXT NOT NULL
       );
       ''',
     );
 
-    await database.insert("UsuarioModel",
-        new UsuarioModel(cpf: "123", nome: "Flavio", senha: "123").toMap());
-    await database.insert("UsuarioModel",
-        new UsuarioModel(cpf: "456", nome: "Pedro", senha: "123").toMap());
+    await database.insert(
+        "UsuarioModel",
+        new UsuarioModel(
+          cpf: "123",
+          nome: "Flavio",
+          senha: "123",
+          email: "profflavio.moreni@fiap.com.br",
+        ).toMap());
+    await database.insert(
+        "UsuarioModel",
+        new UsuarioModel(
+          cpf: "456",
+          nome: "Pedro",
+          senha: "123",
+          email: "profpedro.araujo@fiap.com.br",
+        ).toMap());
   }
 }

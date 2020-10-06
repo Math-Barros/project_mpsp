@@ -44,7 +44,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logo-mpsp.jpg
-    - assets/profile-picture.png
     - assets/reset-password-icon.png
     - assets/social.png
  

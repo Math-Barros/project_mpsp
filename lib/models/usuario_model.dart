@@ -4,11 +4,13 @@ class UsuarioModel {
   String cpf;
   String nome;
   String senha;
+  String email;
 
   UsuarioModel({
     this.cpf,
     this.nome,
     this.senha,
+    this.email,
   });
 
   factory UsuarioModel.fromJson(String str) =>
@@ -20,11 +22,13 @@ class UsuarioModel {
         cpf: json["cpf"],
         nome: json["nome"],
         senha: json["senha"],
+        email: json["email"],
       );
 
   Map<String, dynamic> toMap() => {
         "cpf": cpf,
         "nome": nome,
         "senha": senha,
+        "email": email,
       };
 }

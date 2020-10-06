@@ -18,6 +18,7 @@ class UsuarioRepository {
         "cpf",
         "nome",
         "senha",
+        "email",
       ],
     );
 

@@ -61,7 +61,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                     Text(
                       "Realize seu cadastro!",
                       style: TextStyle(
-                        fontSize: 32,
+                        fontSize: 30,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -92,7 +92,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Precisamos do seu nome para o cadastro';
+                          return 'Precisamos do seu nome para o cadastro!';
                         }
                         return null;
                       },
@@ -113,7 +113,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Digite o RM para logar';
+                          return 'Insira um CPF valido para cadastro!';
                         }
                         return null;
                       },
@@ -121,6 +121,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         usuarioModel.cpf = value;
                       },
                     ),
+
                     TextFormField(
                       // autofocus: true,
                       keyboardType: TextInputType.text,
@@ -135,12 +136,33 @@ class _CadastroScreenState extends State<CadastroScreen> {
                       ),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Digite a senha';
+                          return 'Insira uma senha!';
                         }
                         return null;
                       },
                       onSaved: (value) {
                         usuarioModel.senha = value;
+                      },
+                    ),
+
+                    TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        labelText: "E-mail",
+                        labelStyle: TextStyle(
+                          color: Colors.black38,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Insira um email válido!';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        usuarioModel.email = value;
                       },
                     ),
                     SizedBox(
