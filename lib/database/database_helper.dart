@@ -28,22 +28,22 @@ class DatabaseHelper {
 
   Future<Database> _createDatabase() async {
     String databasesPath = await getDatabasesPath();
-    String dbPath = join(databasesPath, 'portal_app.db');
+    String dbPath = join(databasesPath, 'portal.db');
 
     var database = await openDatabase(
       dbPath,
-      version: 3,
+      version: 1,
       onCreate: _createTables,
     );
+
     return database;
   }
 
   void _createTables(Database database, int version) async {
     // Criando a tabela de Cursos
-    await database.execute("DROP TABLE IF EXISTS UsuarioModel");
     await database.execute(
       '''
-       CREATE TABLE UsuarioModel(
+       CREATE TABLE  UsuarioModel(
         cpf TEXT PRIMARY KEY,
         nome TEXT,
         senha TEXT NOT NULL,
@@ -55,18 +55,18 @@ class DatabaseHelper {
     await database.insert(
         "UsuarioModel",
         new UsuarioModel(
-          cpf: "123",
-          nome: "Flavio",
-          senha: "123",
-          email: "profflavio.moreni@fiap.com.br",
-        ).toMap());
+                cpf: "123",
+                nome: "Flavio",
+                senha: "123",
+                email: "profflavio.moreni@fiap.com.br")
+            .toMap());
     await database.insert(
         "UsuarioModel",
         new UsuarioModel(
-          cpf: "456",
-          nome: "Pedro",
-          senha: "456",
-          email: "profpedro.araujo@fiap.com.br",
-        ).toMap());
+                cpf: "456",
+                nome: "Pedro",
+                senha: "456",
+                email: "profpedro.araujo@fiap.com.br")
+            .toMap());
   }
 }

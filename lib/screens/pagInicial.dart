@@ -1,18 +1,139 @@
 import 'package:flutter/material.dart';
+import 'package:project_mpsp/database/choice_menu.dart';
+import 'package:project_mpsp/models/usuario_model.dart';
+import 'package:project_mpsp/screens/home_screen.dart';
 
-class PagInicial extends StatelessWidget {
+class PagInicial extends StatefulWidget {
+  PagInicial({Key key}) : super(key: key);
+
+  @override
+  _PagInicialState createState() => _PagInicialState();
+}
+
+class _PagInicialState extends State<PagInicial> {
+  UsuarioModel usuarioModel;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // Menu superior
+  ChoiceMenu _selectedChoice = choices[0];
+
+  void _select(ChoiceMenu choice) {
+    setState(() {
+      _selectedChoice = choice;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  // Menu de navegação
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //barra top da tela
-      appBar: AppBar(
-        backgroundColor: Colors.white, //Cor de fundo da tela
-        automaticallyImplyLeading: true,
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: Colors.black,
-            onPressed: () => Navigator.pop(context, false)),
+    usuarioModel = ModalRoute.of(context).settings.arguments;
+    final List<Widget> _widgetOptions = [
+      HomeScreen(
+        usuarioModel: usuarioModel,
+      ),
+      //ChamadaScreen(
+      //  ctx: context,
+      //),
+      //TarefasScreen(
+      //  ctx: context,
+      //)
+    ];
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white70,
+        appBar: AppBar(
+          backgroundColor: Colors.red, //Cor de fundo da tela
+          automaticallyImplyLeading: true,
+          centerTitle: true,
+          actions: [
+            PopupMenuButton<ChoiceMenu>(
+              onSelected: _select,
+              itemBuilder: (BuildContext ctx) {
+                return choices.map((ChoiceMenu choice) {
+                  return PopupMenuItem<ChoiceMenu>(
+                    enabled: choice.enabled,
+                    value: choice,
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              if (choice.route == '/editar') {
+                                Navigator.pushNamed(
+                                  context,
+                                  choice.route,
+                                  arguments: usuarioModel,
+                                );
+                              } else {
+                                Navigator.pushNamed(context, choice.route);
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Icon(
+                                  choice.icon,
+                                  color: Colors.red,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(choice.title),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
+                  );
+                }).toList();
+              },
+            ),
+          ],
+        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.red,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text(
+                'Início',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.assignment_ind),
+              title: Text(
+                'BOT',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.red[900],
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
 }
+
+const List<ChoiceMenu> choices = const <ChoiceMenu>[
+  const ChoiceMenu(
+      title: 'Editar Perfil',
+      icon: Icons.edit,
+      enabled: true,
+      route: '/editar'),
+  const ChoiceMenu(
+      title: 'Configurações', icon: Icons.settings, enabled: false),
+  const ChoiceMenu(
+      title: 'Sair', icon: Icons.exit_to_app, enabled: true, route: '/login'),
+];

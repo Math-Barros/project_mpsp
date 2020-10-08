@@ -44,6 +44,18 @@ class UsuarioRepository {
     }
   }
 
+  Future<UsuarioModel> resetarSenha(String email) async {
+    var connection = await _databaseHelper.connection;
+    var sqlCommand = "SELECT * FROM UsuarioModel WHERE cpf = '$email'";
+
+    var results = await connection.rawQuery(sqlCommand);
+    if (results.length > 0) {
+      return new UsuarioModel.fromMap(results.first);
+    } else {
+      return null;
+    }
+  }
+
   Future<int> update(UsuarioModel usuarioModel) async {
     var connection = await _databaseHelper.connection;
     return await connection.update(

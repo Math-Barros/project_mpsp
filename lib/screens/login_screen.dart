@@ -67,8 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Insira seu CPF para logar!';
-                          } else if (value != usuarioModel.cpf) {
-                            return 'Este CPF está invalido!';
                           }
                           return null;
                         },
@@ -93,8 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Digite sua senha para logar!';
-                          } else if (value != usuarioModel.senha) {
-                            return 'Sua senha está errada!';
                           }
                           return null;
                         },
@@ -102,7 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           usuarioModel.senha = value;
                         },
                       ),
-
+                      SizedBox(
+                        height: 20,
+                      ),
                       //Botao de recuperar senha
                       Container(
                         height: 40, //altura que ira ficar
@@ -153,6 +151,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           },
                         ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
 
                       Container(
