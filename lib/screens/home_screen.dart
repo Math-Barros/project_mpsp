@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
+  void _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not open Url';
+    }
+  }
+
   final UsuarioModel usuarioModel;
 
   const HomeScreen({
@@ -97,7 +106,10 @@ class HomeScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        _launchUrl(
+                            "http://www.mpsp.mp.br/portal/page/portal/noticias/noticia?id_noticia=19578862&id_grupo=118#:~:text=Aplicativo%20de%20solu%C3%A7%C3%B5es%20MPSP%20est%C3%A1%20dispon%C3%ADvel%20para%20sistemas%20Android%20e%20iOS&text=J%C3%A1%20est%C3%A1%20dispon%C3%ADvel%20para%20download,e%20ao%20e%2Dmail%20funcional.");
+                      },
                     ),
                   ),
                 ),
@@ -138,7 +150,10 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        _launchUrl(
+                            "http://www.mpsp.mp.br/portal/page/portal/noticias/noticia?id_noticia=23456620&id_grupo=118");
+                      },
                     ),
                   ),
                 ),
@@ -179,7 +194,10 @@ class HomeScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        _launchUrl(
+                            "http://www.mpsp.mp.br/portal/page/portal/noticias/noticia?id_noticia=23420419&id_grupo=118");
+                      },
                     ),
                   ),
                 ),

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_mpsp/database/choice_menu.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 
 class PagInicial extends StatefulWidget {
   PagInicial({Key key}) : super(key: key);
-
   @override
   _PagInicialState createState() => _PagInicialState();
 }
@@ -13,7 +11,8 @@ class PagInicial extends StatefulWidget {
 class _PagInicialState extends State<PagInicial> {
   UsuarioModel usuarioModel;
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Menu superior
   ChoiceMenu _selectedChoice = choices[0];
@@ -66,29 +65,30 @@ class _PagInicialState extends State<PagInicial> {
                     child: Row(
                       children: [
                         GestureDetector(
-                            onTap: () {
-                              if (choice.route == '/editar') {
-                                Navigator.pushNamed(
-                                  context,
-                                  choice.route,
-                                  arguments: usuarioModel,
-                                );
-                              } else {
-                                Navigator.pushNamed(context, choice.route);
-                              }
-                            },
-                            child: Row(
-                              children: [
-                                Icon(
-                                  choice.icon,
-                                  color: Colors.red,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Text(choice.title),
-                                ),
-                              ],
-                            ))
+                          onTap: () {
+                            if (choice.route == '/editar') {
+                              Navigator.pushNamed(
+                                context,
+                                choice.route,
+                                arguments: usuarioModel,
+                              );
+                            } else {
+                              Navigator.pushNamed(context, choice.route);
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                choice.icon,
+                                color: Colors.red,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(choice.title),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -137,3 +137,11 @@ const List<ChoiceMenu> choices = const <ChoiceMenu>[
   const ChoiceMenu(
       title: 'Sair', icon: Icons.exit_to_app, enabled: true, route: '/login'),
 ];
+
+class ChoiceMenu {
+  const ChoiceMenu({this.title, this.icon, this.enabled, this.route});
+  final String title;
+  final IconData icon;
+  final bool enabled;
+  final String route;
+}
