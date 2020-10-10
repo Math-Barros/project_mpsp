@@ -22,23 +22,14 @@ class _EditarScreenState extends State<EditarScreen> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        fontFamily: 'Montserrat',
-      ),
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text('FIAPP',
-              style: TextStyle(
-                color: Colors.pink,
-                fontWeight: FontWeight.w500,
-              )),
+          backgroundColor: Colors.red,
           centerTitle: true,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.pink,
+              color: Colors.white,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -49,7 +40,7 @@ class _EditarScreenState extends State<EditarScreen> {
           padding: const EdgeInsets.only(
             left: 20,
             right: 20,
-            top: 100,
+            top: 20,
           ),
           child: SingleChildScrollView(
             child: Form(
@@ -57,27 +48,47 @@ class _EditarScreenState extends State<EditarScreen> {
               child: Center(
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Cadastrar Professor",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.pink,
-                        ),
+                    SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Image.asset("assets/editar.png"),
+                    ),
+
+                    //Espacamento da logo com o resto da tela
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    Text(
+                      "Editar Informações",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    Text(
+                      "Insira suas informações para contato nos campos abaixo, "
+                      "logo após podera logar no site.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     TextFormField(
                       decoration: new InputDecoration(
-                          icon: const Icon(Icons.people_outline),
                           fillColor: Colors.white,
                           hintText: 'Digite o seu Nome',
                           labelText: "Nome"),
                       initialValue: usuarioModel.nome.toString(),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Precisamos do seu nome para o cadastro';
+                          return 'Insira um nome válido!';
                         }
                         return null;
                       },
@@ -87,7 +98,6 @@ class _EditarScreenState extends State<EditarScreen> {
                     ),
                     TextFormField(
                       decoration: new InputDecoration(
-                          icon: const Icon(Icons.person_pin),
                           fillColor: Colors.white,
                           hintText: 'Insira o CPF',
                           enabled: false,
@@ -106,7 +116,6 @@ class _EditarScreenState extends State<EditarScreen> {
                     TextFormField(
                       obscureText: true,
                       decoration: new InputDecoration(
-                        icon: const Icon(Icons.lock),
                         fillColor: Colors.white,
                         hintText: 'Insira sua senha',
                         labelText: 'Senha',
@@ -123,17 +132,14 @@ class _EditarScreenState extends State<EditarScreen> {
                       },
                     ),
                     TextFormField(
-                      obscureText: true,
                       decoration: new InputDecoration(
-                        icon: const Icon(Icons.lock),
-                        fillColor: Colors.white,
-                        hintText: 'Insira seu email',
-                        labelText: 'email',
-                      ),
-                      initialValue: usuarioModel.senha.toString(),
+                          fillColor: Colors.white,
+                          hintText: 'Digite o email desejado',
+                          labelText: "Email"),
+                      initialValue: usuarioModel.email.toString(),
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Digite seu email!';
+                          return 'Insira um email válido!';
                         }
                         return null;
                       },
@@ -141,33 +147,59 @@ class _EditarScreenState extends State<EditarScreen> {
                         usuarioModel.email = value;
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: RaisedButton(
-                        child: Text("Cadastrar",
-                            style: TextStyle(
-                              color: Colors.white,
-                            )),
-                        color: Colors.pink,
-                        onPressed: () {
-                          if (formKey.currentState.validate()) {
-                            formKey.currentState.save();
 
-                            usuarioRepository.update(usuarioModel);
-
-                            Navigator.pop(context, usuarioModel);
-                          } else {
-                            scaffoldKey.currentState.showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Não foi possivel editar o usuario',
-                                ),
-                              ),
-                            );
-                          }
-                        },
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 60,
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [0.3, 1],
+                          colors: [
+                            Colors.red,
+                            Colors.redAccent,
+                          ],
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
                       ),
-                    )
+                      child: SizedBox.expand(
+                        child: FlatButton(
+                          child: Text(
+                            "Concluir",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                          color: Colors.red,
+                          onPressed: () {
+                            if (formKey.currentState.validate()) {
+                              formKey.currentState.save();
+
+                              usuarioRepository.update(usuarioModel);
+
+                              Navigator.pop(context, usuarioModel);
+                            } else {
+                              scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Não foi possivel editar o usuario',
+                                  ),
+                                ),
+                              );
+                            }
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
