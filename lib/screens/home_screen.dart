@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   final UsuarioModel usuarioModel;
+  
 
   const HomeScreen({
     this.usuarioModel,

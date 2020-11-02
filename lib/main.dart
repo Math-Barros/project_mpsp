@@ -3,8 +3,6 @@ import 'package:project_mpsp/screens/editar_screen.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/screens/login_screen.dart';
 import 'package:project_mpsp/screens/pagInicial.dart';
-import 'package:project_mpsp/screens/resetarSenha.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -20,7 +18,6 @@ class MyApp extends StatelessWidget {
       home: MaterialApp(initialRoute: '/login', routes: {
         '/login': (context) => LoginScreen(),
         '/menu': (context) => PagInicial(),
-        '/resetar': (context) => ResetarSenha(),
         '/home': (context) => HomeScreen(),
         '/editar': (context) => EditarScreen(),
       }),

@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: FlatButton(
                           //Texto do botao
                           child: Text(
-                            "Recuperar senha", //Texto a ser exibido
+                            "Esqueceu sua senha?", //Texto a ser exibido
                             textAlign:
                                 TextAlign.right, //Posicionando na direita
                           ),

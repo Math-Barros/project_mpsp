@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
+import 'package:project_mpsp/screens/login_screen.dart';
 
 class PagInicial extends StatefulWidget {
   PagInicial({Key key}) : super(key: key);
@@ -15,6 +16,7 @@ class _PagInicialState extends State<PagInicial> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Menu superior
+  // ignore: unused_field
   ChoiceMenu _selectedChoice = choices[0];
 
   void _select(ChoiceMenu choice) {
@@ -42,9 +44,6 @@ class _PagInicialState extends State<PagInicial> {
       //ChamadaScreen(
       //  ctx: context,
       //),
-      //TarefasScreen(
-      //  ctx: context,
-      //)
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -71,6 +70,13 @@ class _PagInicialState extends State<PagInicial> {
                                 context,
                                 choice.route,
                                 arguments: usuarioModel,
+                              );
+                            } else if (choice.route == '/login') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ),
                               );
                             } else {
                               Navigator.pushNamed(context, choice.route);
@@ -103,6 +109,7 @@ class _PagInicialState extends State<PagInicial> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
+              // ignore: deprecated_member_use
               title: Text(
                 'Início',
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -110,6 +117,7 @@ class _PagInicialState extends State<PagInicial> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.assignment_ind),
+              // ignore: deprecated_member_use
               title: Text(
                 'BOT',
                 style: TextStyle(fontWeight: FontWeight.w600),
