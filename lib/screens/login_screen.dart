@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_mpsp/models/usuario_model.dart';
 import 'package:project_mpsp/repository/usuario_repository.dart';
 import 'package:project_mpsp/screens/cadastro_screen.dart';
-import 'package:project_mpsp/screens/resetarSenha.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -101,6 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 20,
                       ),
+<<<<<<< HEAD
                       //Botao de recuperar senha
                       Container(
                         height: 40, //altura que ira ficar
@@ -128,6 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
+=======
+>>>>>>> 2f0d08e3a7c8b60f46c941ad8f8c380d4e544e5a
                       //Botao de cadastro
                       Container(
                         height: 40, //altura que ira ficar

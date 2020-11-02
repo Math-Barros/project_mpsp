@@ -3,6 +3,10 @@ import 'package:project_mpsp/screens/editar_screen.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/screens/login_screen.dart';
 import 'package:project_mpsp/screens/pagInicial.dart';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f0d08e3a7c8b60f46c941ad8f8c380d4e544e5a
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
