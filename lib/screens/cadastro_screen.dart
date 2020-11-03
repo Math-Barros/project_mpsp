@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:project_mpsp/database/firebase_utils.dart';
 import 'package:project_mpsp/models/user_model.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
+import 'package:project_mpsp/utils/firebase_utils.dart';
 
 class CadastroScreen extends StatefulWidget {
   CadastroScreen({Key key}) : super(key: key);
@@ -269,7 +269,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
         .doc(firebaseUser.uid)
         .set(userModel.toMap());
 
-    Fluttertoast.showToast(msg: "Register Success");
+    Fluttertoast.showToast(msg: "Cadastro efetuado!");
 
     await FirebaseUtils.updateFirebaseToken();
 
@@ -286,7 +286,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
     await firebaseUser.sendEmailVerification();
 
     Fluttertoast.showToast(
-        msg: "email verifcation link has sent to your email.");
+        msg: "Um link de verificação foi enviado a seu email!");
 
     Navigator.pushAndRemoveUntil(
         context,

@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:project_mpsp/models/post_model.dart';
 
 class FirebaseUtils {
   static final StorageReference notificationsStorageReference =
@@ -26,32 +25,6 @@ class FirebaseUtils {
     final url = (await storageTaskSnapshot.ref.getDownloadURL());
     print("url : $url");
     return url;
-  }
-
-  static Future postNotification(PostModel model, String filePath) async {
-    if (filePath != null) {
-      // here deleteing old image from storage
-      if (model.imageURL != null && model.imageURL.contains("https://")) {
-        await FirebaseStorage.instance
-            .getReferenceFromUrl(model.imageURL)
-            .then((onValue) {
-          onValue.delete();
-        });
-      }
-
-      model.imageURL = await uploadImageToStorage(File(filePath));
-      print("addProdcut url ${model.imageURL}");
-    }
-
-    DocumentReference ref = statuesCollectionsReference.doc();
-
-    if (model.docid != null) {
-      ref = statuesCollectionsReference.doc(model.docid);
-    }
-    model.docid = ref.id;
-    model.imageURL = model.imageURL;
-    print(model.toMap().toString());
-    return await ref.set(model.toMap());
   }
 
   static updateFirebaseToken() async {
