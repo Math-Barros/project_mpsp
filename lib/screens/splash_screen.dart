@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         width: double.infinity,
         child: Center(
-          child: Text("Ministério Público do Estado de São Paulo."),
+          child: Text("☔ By Umbrella®"),
         ),
       ),
     );
