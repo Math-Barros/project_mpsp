@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:project_mpsp/models/usuario_model.dart';
-import 'package:project_mpsp/repository/usuario_repository.dart';
 
 class ResetarSenha extends StatefulWidget {
   ResetarSenha({Key key}) : super(key: key);
@@ -17,9 +14,6 @@ class _ResetarSenhaState extends State<ResetarSenha> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   TextEditingController editController = TextEditingController();
-
-  UsuarioRepository usuarioRepository = UsuarioRepository();
-  UsuarioModel usuarioModel = UsuarioModel();
 
   @override
   Widget build(BuildContext context) {
@@ -106,15 +100,6 @@ class _ResetarSenhaState extends State<ResetarSenha> {
                                     fontSize: 20) //Cor, espessura e tamanho
 
                                 ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Insira seu Email para recuperar o cadastro!';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              usuarioModel.email = value;
-                            },
                           ),
                           SizedBox(
                             height: 20,
@@ -166,7 +151,7 @@ class _ResetarSenhaState extends State<ResetarSenha> {
 
   void resetPassword(BuildContext context) async {
     if (editController.text.length == 0 || !editController.text.contains("@")) {
-      Fluttertoast.showToast(msg: "Enter valid email");
+      Fluttertoast.showToast(msg: "Insira um email valido!!");
       return;
     }
 
@@ -174,7 +159,7 @@ class _ResetarSenhaState extends State<ResetarSenha> {
         .sendPasswordResetEmail(email: editController.text);
     Fluttertoast.showToast(
         msg:
-            "Reset password link has sent your mail please use it to change the password.");
+            "Um link foi enviado ao seu email, use ele para resetar sua senha.");
     Navigator.pop(context);
   }
 }

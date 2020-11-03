@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:project_mpsp/models/usuario_model.dart';
-import 'package:project_mpsp/repository/usuario_repository.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:project_mpsp/database/firebase_utils.dart';
 import 'package:project_mpsp/screens/cadastro_screen.dart';
+import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/screens/resetarSenha.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,11 +14,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  String _email, _password;
+  var _formkey = GlobalKey<FormState>();
 
-  UsuarioRepository usuarioRepository = UsuarioRepository();
-  UsuarioModel usuarioModel = UsuarioModel();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: SingleChildScrollView(
               child: Form(
-                key: formKey,
+                key: _formkey,
                 child: Center(
                   child: Column(
                     children: <Widget>[
@@ -51,12 +52,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       TextFormField(
                         autofocus: true, //Para focar no campo
-                        keyboardType: TextInputType
-                            .number, //Exibe somente os numeros do teclado
+                        keyboardType: TextInputType.emailAddress,
 
                         //Configuracoes do campo
                         decoration: new InputDecoration(
-                            labelText: "CPF", //Texto que ira aparecer
+                            labelText: "Email", //Texto que ira aparecer
 
                             labelStyle: TextStyle(
                                 color: Colors.black38,
@@ -64,14 +64,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 20) //Cor, espessura e tamanho
 
                             ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Insira seu CPF para logar!';
-                          }
-                          return null;
+                        validator: (item) {
+                          return item.contains("@")
+                              ? null
+                              : "Insira um email válido!";
                         },
-                        onSaved: (value) {
-                          usuarioModel.cpf = value;
+                        onChanged: (item) {
+                          setState(() {
+                            _email = item;
+                          });
                         },
                       ),
                       TextFormField(
@@ -88,14 +89,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 20,
                           ),
                         ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Digite sua senha para logar!';
-                          }
-                          return null;
+                        validator: (item) {
+                          return item.length > 6
+                              ? null
+                              : "Sua senha deve ter, no mínimo 6 caracteres!";
                         },
-                        onSaved: (value) {
-                          usuarioModel.senha = value;
+                        onChanged: (item) {
+                          setState(() {
+                            _password = item;
+                          });
                         },
                       ),
                       SizedBox(
@@ -186,31 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               textAlign: TextAlign.center,
                             ),
                             onPressed: () {
-                              if (formKey.currentState.validate()) {
-                                formKey.currentState.save();
-
-                                var resultLogin = usuarioRepository.login(
-                                    usuarioModel.cpf, usuarioModel.senha);
-
-                                resultLogin.then((usuario) {
-                                  if (usuario == null) {
-                                  } else {
-                                    Navigator.pushNamed(
-                                      context,
-                                      '/menu',
-                                      arguments: usuario,
-                                    );
-                                  }
-                                });
-                              } else {
-                                scaffoldKey.currentState.showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Não foi possível fazer o login.',
-                                    ),
-                                  ),
-                                );
-                              }
+                              login();
                             },
                           ),
                         ),
@@ -224,5 +202,35 @@ class _LoginScreenState extends State<LoginScreen> {
         ]),
       ),
     );
+  }
+
+  void login() {
+    if (_formkey.currentState.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: _email, password: _password)
+          .then((user) async {
+        // sign up
+        setState(() {
+          isLoading = false;
+        });
+
+        Fluttertoast.showToast(msg: "Login Success");
+
+        await FirebaseUtils.updateFirebaseToken();
+
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => HomeScreen()),
+            (Route<dynamic> route) => false);
+      }).catchError((onError) {
+        setState(() {
+          isLoading = false;
+        });
+        Fluttertoast.showToast(msg: "error " + onError.toString());
+      });
+    }
   }
 }
