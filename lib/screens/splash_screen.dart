@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       } else {
         // user already logged in ==> Home Screen
         Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (_) => LoginScreen()), (route) => false);
+            MaterialPageRoute(builder: (_) => HomeScreen()), (route) => false);
       }
     });
   }
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         width: double.infinity,
         child: Center(
-          child: Text("☔ By Umbrella®"),
+          child: Text("© 2020 Umbrella, Inc.  ☔"),
         ),
       ),
     );

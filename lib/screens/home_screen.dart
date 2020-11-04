@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Text(
-                      'Olá, ${FirebaseAuth.instance.currentUser.email}',
+                      'Olá, ${FirebaseAuth.instance.currentUser.displayName}',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.red,

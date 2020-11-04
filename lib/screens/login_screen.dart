@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:project_mpsp/screens/cadastro_screen.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/screens/resetarSenha.dart';
@@ -215,12 +217,12 @@ class _LoginScreenState extends State<LoginScreen> {
           .signInWithEmailAndPassword(email: _email, password: _password)
           .then((user) async {
         // sign up
-
         setState(() {
           isLoading = false;
         });
 
         Fluttertoast.showToast(msg: "Login Success");
+
         await FirebaseUtils.updateFirebaseToken();
 
         Navigator.pushAndRemoveUntil(
@@ -231,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           isLoading = false;
         });
-        Fluttertoast.showToast(msg: "error " + onError.toString());
+        Fluttertoast.showToast(msg: "Login inválido!! " + onError.toString());
       });
     }
   }
