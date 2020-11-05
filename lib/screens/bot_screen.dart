@@ -22,7 +22,15 @@ class _BotScreenState extends State<BotScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.red,
+        centerTitle: true,
+        title: Text('Chat',
+            style: TextStyle(shadows: <Shadow>[
+              Shadow(
+                  offset: Offset(0.5, 0.5),
+                  blurRadius: 1.0,
+                  color: Color.fromARGB(185, 10, 10, 8)),
+            ])),
+        backgroundColor: Colors.redAccent[700],
       ),
       body: Column(
         children: <Widget>[
@@ -50,7 +58,9 @@ class _BotScreenState extends State<BotScreen> {
   Future _dialogFlowRequest({String query}) async {
     // Adiciona uma mensagem temporária na lista
     _addMessage(
-        name: 'Rose', text: 'Escrevendo...', type: ChatMessageType.received);
+        name: 'Atendente',
+        text: 'Escrevendo...',
+        type: ChatMessageType.received);
 
     // Faz a autenticação com o serviço, envia a mensagem e recebe uma resposta da Intent
     AuthGoogle authGoogle =
@@ -66,7 +76,7 @@ class _BotScreenState extends State<BotScreen> {
 
     // adiciona a mensagem com a resposta do DialogFlow
     _addMessage(
-        name: 'Rose',
+        name: 'Atendente',
         text: response.getMessage() ?? '',
         type: ChatMessageType.received);
   }
@@ -74,7 +84,7 @@ class _BotScreenState extends State<BotScreen> {
   // Envia uma mensagem com o padrão a direita
   void _sendMessage({String text}) {
     _controllerText.clear();
-    _addMessage(name: 'Kleber Andrade', text: text, type: ChatMessageType.sent);
+    _addMessage(name: 'Usuário', text: text, type: ChatMessageType.sent);
   }
 
   // Adiciona uma mensagem na lista de mensagens

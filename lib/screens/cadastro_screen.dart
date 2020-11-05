@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project_mpsp/models/user_model.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/utils/firebase_utils.dart';
-import 'package:project_mpsp/utils/google_signin.dart';
 
 class CadastroScreen extends StatefulWidget {
   CadastroScreen({Key key}) : super(key: key);

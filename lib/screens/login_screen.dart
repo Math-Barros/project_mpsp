@@ -240,13 +240,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                               color: Colors.grey),
                                         ])),
                                 onPressed: () {
-                                  //Muda para a pagina de cadastro
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SignDemo(),
-                                    ),
-                                  );
+                                  signInWithGoogle().then((result) {
+                                    if (result != null) {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return HomeScreen();
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  });
                                 },
                               ),
                               decoration: BoxDecoration(
