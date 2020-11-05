@@ -27,47 +27,83 @@ class _LoginScreenState extends State<LoginScreen> {
       body: isLoading
           ? Center(child: CircularProgressIndicator())
           : Container(
-              padding: EdgeInsets.only(top: 10, left: 40, right: 40),
+              padding: EdgeInsets.only(top: 10, left: 5, right: 5),
               color: Colors.white,
               child: ListView(children: <Widget>[
                 Container(
                   padding: const EdgeInsets.only(
                     left: 20,
                     right: 20,
-                    top: 100,
+                    top: 0,
                   ),
                   child: SingleChildScrollView(
                     child: Form(
                       key: _formkey,
                       child: Center(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(
                               //Tamanho do logo
-                              width: 150,
-                              height: 150,
+                              width: 600,
+                              height: 200,
+                            
 
                               //Carregando a imagem
-                              child: Image.asset("assets/logo-mpsp.jpg"), //logo
+                              child: Image.asset("assets/logo-launcher.png"), //logo
+
                             ),
-                            //Espaço entre a logo e os inputs
+                            
+                            //Texto bem-vindo
+                            Text("Bem-vindo!", style: TextStyle(
+                              shadows: <Shadow>[
+                                Shadow(
+                                  offset: Offset(0.5, 0.5),
+                                  blurRadius: 1.0,
+                                  color: Color.fromARGB(255,0,0,0),
+                                ),
+                              ],
+                              fontSize: 45, color: Colors.black, fontFamily: 'Roboto', fontWeight: FontWeight.w500
+                            )),
+
+                            //Espaço entre texto e formulario
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
-                            TextFormField(
+
+                            //Formulário
+
+                            Container(
+                              /*decoration: BoxDecoration(
+                                boxShadow: [new BoxShadow(blurRadius: 0.5),],
+
+                              ),*/
+                              child: TextFormField(
                               autofocus: true, //Para focar no campo
                               keyboardType: TextInputType.emailAddress,
+                              
 
                               //Configuracoes do campo
                               decoration: new InputDecoration(
-                                  labelText: "Email", //Texto que ira aparecer
-
+                                
+                                
+                                  labelText: "Email",
                                   labelStyle: TextStyle(
                                       color: Colors.black38,
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 20) //Cor, espessura e tamanho
+                                      fontSize: 20), //Cor, espessura e tamanho
+
+
+                                  border: new OutlineInputBorder(
+                                    borderRadius: new BorderRadius.circular(15.0),
+                                    borderSide: new BorderSide(color: Colors.grey, width:1),
+                                  ) //Texto que ira aparecer
+
+                                  
 
                                   ),
+
+                              //Erro
                               validator: (item) {
                                 return item.contains("@")
                                     ? null
@@ -78,7 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _email = item;
                                 });
                               },
-                            ),
+                            ),),
+
+                            //Espaço
+                            SizedBox(height: 10),
+                            
+
                             TextFormField(
                               autofocus: true,
                               keyboardType:
@@ -86,17 +127,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: true, //oculta os caracteres
 
                               decoration: InputDecoration(
+                                
+                                
                                 labelText: "Senha",
                                 labelStyle: TextStyle(
                                   color: Colors.black38,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 20,
+                                
+                                  
                                 ),
+
+
+                                border: new OutlineInputBorder(
+                                    borderRadius: new BorderRadius.circular(15.0),
+                                    borderSide: new BorderSide(color: Colors.grey, width:1),
+                                  ),
                               ),
                               validator: (item) {
                                 return item.length > 6
                                     ? null
-                                    : "Sua senha deve ter, no mínimo 6 caracteres!";
+                                    : "Insira uma senha! ";
                               },
                               onChanged: (item) {
                                 setState(() {
@@ -104,22 +155,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               },
                             ),
+
+                            //SizedBox
                             SizedBox(
-                              height: 20,
+                              height: 3,
                             ),
 
                             //Botao de recuperar senha
                             Container(
-                              height: 40, //altura que ira ficar
-                              alignment: Alignment.centerRight, //Alinhando
+                              height: 30, //altura que ira ficar
+                              alignment: Alignment.center, //Alinhando
 
                               //Botao
                               child: FlatButton(
                                 //Texto do botao
                                 child: Text(
-                                  "Esqueceu sua senha?", //Texto a ser exibido
+                                  "Esqueci a senha.",
+                                  style: TextStyle(
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: Offset(0.5,0.5),
+                                        blurRadius: 1.0,
+                                        color: Color.fromARGB(185, 10, 10, 8)
+                                      ),
+                                    ],
+                                    fontFamily: 'Roboto',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+
+                                  ), //Texto a ser exibido
                                   textAlign:
-                                      TextAlign.right, //Posicionando na direita
+                                      TextAlign.center, //Posicionando na direita
                                 ),
 
                                 //Ao pressionar o botao
@@ -136,9 +203,54 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
 
                             //Botao de cadastro
+                            
+
+                            Container(
+                              height: 50,
+                              alignment: Alignment.centerLeft,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  stops: [0.3, 1],
+                                  colors: [
+                                    Colors.red[500],
+                                    Colors.redAccent[400],
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                              ),
+                              child: SizedBox.expand(
+                                child: FlatButton(
+                                  child: Text(
+                                    "ENTRAR",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  onPressed: () {
+                                    login();
+                                  },
+                                ),
+                              ),
+                              
+                            ),
+                            SizedBox(height: 10),
+
+                            Container(height: 50,
+                            alignment: Alignment.center,
+                            
+                            ),
+
+
                             Container(
                               height: 40, //altura que ira ficar
-                              alignment: Alignment.centerRight, //Alinhando
+                              alignment: Alignment.center, //Alinhando
 
                               //Botao
                               child: FlatButton(
@@ -159,44 +271,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
 
-                            Container(
-                              height: 60,
-                              alignment: Alignment.centerLeft,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  stops: [0.3, 1],
-                                  colors: [
-                                    Colors.red,
-                                    Colors.redAccent,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                              ),
-                              child: SizedBox.expand(
-                                child: FlatButton(
-                                  child: Text(
-                                    "Acessar",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  onPressed: () {
-                                    login();
-                                  },
-                                ),
-                              ),
-                            ),
+
+
+
+
                           ],
                         ),
                       ),
