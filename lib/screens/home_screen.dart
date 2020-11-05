@@ -57,9 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (c) => LoginScreen()));
+              context, MaterialPageRoute(builder: (c) => BotScreen()));
         },
-        child: Icon(Icons.publish),
+        child: Icon(Icons.sms),
+        backgroundColor: Colors.red,
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 0),
