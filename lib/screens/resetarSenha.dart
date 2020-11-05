@@ -19,11 +19,12 @@ class _ResetarSenhaState extends State<ResetarSenha> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, //Cor de fundo da tela
+        title: Text("Voltar"),
+        backgroundColor: Colors.redAccent[700], //Cor de fundo da tela
         automaticallyImplyLeading: true,
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: Colors.black,
+            color: Colors.white,
             onPressed: () => Navigator.pop(context)),
       ),
       body: isLoading
@@ -46,7 +47,7 @@ class _ResetarSenhaState extends State<ResetarSenha> {
                               children: <Widget>[
                                 //Icone de reset
                                 SizedBox(
-                                  width: 200,
+                                  width: 600,
                                   height: 200,
                                   child: Image.asset(
                                       "assets/reset-password-icon.png"),
@@ -58,10 +59,17 @@ class _ResetarSenhaState extends State<ResetarSenha> {
                                 ),
 
                                 Text(
-                                  "Esqueceu sua senha?",
+                                  "RESETAR",
                                   style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.w500,
+                                    shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Colors.grey
+                                        ),
+                                      ]
                                   ),
                                 ),
 
@@ -70,22 +78,28 @@ class _ResetarSenhaState extends State<ResetarSenha> {
                                 ),
 
                                 Text(
-                                  "Por favor, informe o E-mail associado a sua conta que enviaremos"
-                                  " um link com as instruções para restauração de sua senha!",
+                                  "Informe o e-mail associado a sua conta. Um link com o passo a passo para resetar a senha será enviado no mesmo.",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w400,
+                                    shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Colors.grey
+                                        ),
+                                      ]
                                   ),
                                 ),
                               ],
                             ),
                           ),
+
+                          SizedBox(height: 30,),
                           Container(
-                            width: double.infinity,
-                            padding:
-                                EdgeInsets.only(top: 10, left: 20, right: 20),
-                            color: Colors.white,
+                            width: 600,
+                            
                             child: Column(
                               children: <Widget>[
                                 TextFormField(
@@ -102,40 +116,52 @@ class _ResetarSenhaState extends State<ResetarSenha> {
                                           color: Colors.black38,
                                           fontWeight: FontWeight.w400,
                                           fontSize:
-                                              20) //Cor, espessura e tamanho
+                                              20),
+                                              border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(15.0),
+                                      borderSide: new BorderSide(color: Colors.grey, width:1),
+                                    ), //Cor, espessura e tamanho
 
                                       ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 30,
                                 ),
                                 Container(
-                                  height: 60,
-                                  alignment: Alignment.centerLeft,
+                                  height: 50,
+                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                       stops: [0.3, 1],
                                       colors: [
-                                        Color(0xFFF58524),
-                                        Color(0XFFF92B7F),
+                                        Colors.red[500],
+                                        Colors.redAccent[400],
                                       ],
                                     ),
                                     borderRadius: BorderRadius.all(
-                                      Radius.circular(5),
+                                      Radius.circular(15),
                                     ),
                                   ),
                                   child: SizedBox.expand(
                                     //Botão enviar
                                     child: FlatButton(
                                       child: Text(
-                                        "Enviar",
+                                        "ENVIAR",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w800,
-                                            color: Colors.white,
-                                            fontSize: 20),
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Color.fromARGB(185, 10, 10, 8)
+                                        ),
+                                      ]),
+                                            
                                       ),
                                       onPressed: () {
                                         resetPassword(context);
