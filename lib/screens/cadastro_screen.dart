@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project_mpsp/models/user_model.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/utils/firebase_utils.dart';
-import 'package:icon_shadow/icon_shadow.dart';
+import 'package:project_mpsp/utils/google_signin.dart';
 
 class CadastroScreen extends StatefulWidget {
   CadastroScreen({Key key}) : super(key: key);
@@ -48,18 +48,9 @@ class _CadastroScreenState extends State<CadastroScreen> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        //Icone de reset
-                        /*SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset("assets/social.png"),
-                        ),*/
-
-                        //Espacamento da logo com o resto da tela
                         SizedBox(
                           height: 20,
                         ),
-
                         Text(
                           "CADASTRE-SE",
                           style: TextStyle(
@@ -67,54 +58,49 @@ class _CadastroScreenState extends State<CadastroScreen> {
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
                             shadows: <Shadow>[
-                                        Shadow(
-                                          offset: Offset(0.5,0.5),
-                                          blurRadius: 1.0,
-                                          color: Colors.grey
-                                        ),
-                                      ],
-                            
+                              Shadow(
+                                  offset: Offset(0.5, 0.5),
+                                  blurRadius: 1.0,
+                                  color: Colors.grey),
+                            ],
                           ),
                         ),
-
                         SizedBox(
                           height: 10,
                         ),
-
                         Text(
                           "Insira suas informações para contato nos campos abaixo, "
                           "logo após podera logar no site.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            shadows: <Shadow>[
-                                        Shadow(
-                                          offset: Offset(0.5,0.5),
-                                          blurRadius: 1.0,
-                                          color: Colors.grey
-                                        ),
-                                      ]
-                          ),
+                              fontFamily: 'Roboto',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              shadows: <Shadow>[
+                                Shadow(
+                                    offset: Offset(0.5, 0.5),
+                                    blurRadius: 1.0,
+                                    color: Colors.grey),
+                              ]),
                         ),
-
-                         SizedBox(height: 10,),
+                        SizedBox(
+                          height: 25,
+                        ),
                         TextFormField(
                             // autofocus: true,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Nome",
-                              labelStyle: TextStyle(
-                                color: Colors.black38,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
-                              border: new OutlineInputBorder(
-                                      borderRadius: new BorderRadius.circular(15.0),
-                                      borderSide: new BorderSide(color: Colors.grey, width:1),
-                                    )
-                            ),
+                                labelText: "Nome",
+                                labelStyle: TextStyle(
+                                  color: Colors.black38,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                border: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(15.0),
+                                  borderSide: new BorderSide(
+                                      color: Colors.grey, width: 1),
+                                )),
                             validator: (item) {
                               return item.length > 0
                                   ? null
@@ -125,24 +111,24 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                 _nome = item;
                               });
                             }),
-                            SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         TextFormField(
                           // autofocus: true,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: "CPF",
-                            labelStyle: TextStyle(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                            ),
-                            border: new OutlineInputBorder(
-                                      borderRadius: new BorderRadius.circular(15.0),
-                                      borderSide: new BorderSide(color: Colors.grey, width:1),
-                                    )
-                          ),
+                              labelText: "CPF",
+                              labelStyle: TextStyle(
+                                color: Colors.black38,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(15.0),
+                                borderSide: new BorderSide(
+                                    color: Colors.grey, width: 1),
+                              )),
                           validator: (item) {
                             return item.length < 11
                                 ? "Insira um CPF válido"
@@ -161,23 +147,22 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         SizedBox(
                           height: 10,
                         ),
-
                         TextFormField(
                           // autofocus: true,
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           decoration: InputDecoration(
-                            labelText: "Senha",
-                            labelStyle: TextStyle(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                            ),
-                            border: new OutlineInputBorder(
-                                      borderRadius: new BorderRadius.circular(15.0),
-                                      borderSide: new BorderSide(color: Colors.grey, width:1),
-                                    )
-                          ),
+                              labelText: "Senha",
+                              labelStyle: TextStyle(
+                                color: Colors.black38,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(15.0),
+                                borderSide: new BorderSide(
+                                    color: Colors.grey, width: 1),
+                              )),
                           validator: (item) {
                             return item.length > 6
                                 ? null
@@ -192,22 +177,20 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         SizedBox(
                           height: 10,
                         ),
-
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            labelText: "E-mail",
-                            labelStyle: TextStyle(
-                              color: Colors.black38,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                            ),
-                            border: new OutlineInputBorder(
-                                      borderRadius: new BorderRadius.circular(15.0),
-                                      borderSide: new BorderSide(color: Colors.grey, width:1),
-                                    )
-                            
-                          ),
+                              labelText: "E-mail",
+                              labelStyle: TextStyle(
+                                color: Colors.black38,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(15.0),
+                                borderSide: new BorderSide(
+                                    color: Colors.grey, width: 1),
+                              )),
                           validator: (item) {
                             return item.contains("@")
                                 ? null
@@ -222,9 +205,8 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         SizedBox(
                           height: 30,
                         ),
-
                         Container(
-                          height: 50,
+                          height: 60,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -243,19 +225,17 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           child: SizedBox.expand(
                             child: FlatButton(
                               child: Text(
-                                "CADASTRAR",
+                                "Cadastrar",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 27,
-                                  shadows: <Shadow>[
-                                        Shadow(
-                                          offset: Offset(0.5,0.5),
+                                    color: Colors.white,
+                                    fontSize: 27,
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                          offset: Offset(0.5, 0.5),
                                           blurRadius: 1.0,
-                                          color: Color.fromARGB(185, 10, 10, 8)
-                                        ),
-                                      ]
-                                ),
+                                          color:
+                                              Color.fromARGB(185, 10, 10, 8)),
+                                    ]),
                                 textAlign: TextAlign.center,
                               ),
                               onPressed: () {
@@ -264,40 +244,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
                             ),
                           ),
                         ),
-                        
-                        SizedBox(height: 20),
-                        Container(height: 50,
-                              alignment: Alignment.center,
-                              //Botao
-                                // ignore: missing_required_param
-                                child: FlatButton(
-                                  child: Text("Cadastre-se com o Google.", textAlign: TextAlign.left, style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    color: Colors.black45,
-                                    shadows: <Shadow>[
-                                        Shadow(
-                                          offset: Offset(0.5,0.5),
-                                          blurRadius: 1.0,
-                                          color: Colors.grey
-                                        ),
-                                      ]
-                                  )),
-                                ),
-                                decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(color:Colors.grey, width:1),
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(image: AssetImage('assets/icon_google.png'),
-                                fit: BoxFit.fitHeight,
-                                
-                                alignment: Alignment(-0.9,0.5)),
-
-                                
-                                
-
-                              ),
-                              
-                              ),
                       ],
                     ),
                   ),

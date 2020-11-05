@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-
-import 'package:project_mpsp/models/user_model.dart';
 import 'package:project_mpsp/screens/bot_screen.dart';
 
 import 'package:project_mpsp/screens/login_screen.dart';

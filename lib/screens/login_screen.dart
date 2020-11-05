@@ -7,6 +7,7 @@ import 'package:project_mpsp/screens/cadastro_screen.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/screens/resetarSenha.dart';
 import 'package:project_mpsp/utils/firebase_utils.dart';
+import 'package:project_mpsp/utils/google_signin.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -243,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => CadastroScreen(),
+                                      builder: (context) => SignDemo(),
                                     ),
                                   );
                                 },
