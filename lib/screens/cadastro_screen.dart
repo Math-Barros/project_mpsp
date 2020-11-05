@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project_mpsp/models/user_model.dart';
 import 'package:project_mpsp/screens/home_screen.dart';
 import 'package:project_mpsp/utils/firebase_utils.dart';
+import 'package:icon_shadow/icon_shadow.dart';
 
 class CadastroScreen extends StatefulWidget {
   CadastroScreen({Key key}) : super(key: key);
@@ -25,11 +26,12 @@ class _CadastroScreenState extends State<CadastroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, //Cor de fundo da tela
+        title: Text("Voltar"),
+        backgroundColor: Colors.redAccent[700], //Cor de fundo da tela
         automaticallyImplyLeading: true,
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: Colors.black,
+            color: Colors.white,
             onPressed: () => Navigator.pop(context)),
       ),
       body: isLoading
@@ -38,7 +40,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
               padding: const EdgeInsets.only(
                 left: 20,
                 right: 20,
-                top: 15,
+                top: 5,
               ),
               child: SingleChildScrollView(
                 child: Form(
@@ -47,11 +49,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
                     child: Column(
                       children: <Widget>[
                         //Icone de reset
-                        SizedBox(
+                        /*SizedBox(
                           width: 100,
                           height: 100,
                           child: Image.asset("assets/social.png"),
-                        ),
+                        ),*/
 
                         //Espacamento da logo com o resto da tela
                         SizedBox(
@@ -59,10 +61,19 @@ class _CadastroScreenState extends State<CadastroScreen> {
                         ),
 
                         Text(
-                          "Realize seu cadastro!",
+                          "CADASTRE-SE",
                           style: TextStyle(
+                            fontFamily: 'Roboto',
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
+                            shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Colors.grey
+                                        ),
+                                      ],
+                            
                           ),
                         ),
 
@@ -75,10 +86,20 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           "logo após podera logar no site.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontFamily: 'Roboto',
+                            fontSize: 15,
                             fontWeight: FontWeight.w400,
+                            shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Colors.grey
+                                        ),
+                                      ]
                           ),
                         ),
+
+                         SizedBox(height: 10,),
                         TextFormField(
                             // autofocus: true,
                             keyboardType: TextInputType.text,
@@ -89,6 +110,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                 fontWeight: FontWeight.w400,
                                 fontSize: 20,
                               ),
+                              border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(15.0),
+                                      borderSide: new BorderSide(color: Colors.grey, width:1),
+                                    )
                             ),
                             validator: (item) {
                               return item.length > 0
@@ -100,6 +125,9 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                 _nome = item;
                               });
                             }),
+                            SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           // autofocus: true,
                           keyboardType: TextInputType.number,
@@ -110,6 +138,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
                             ),
+                            border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(15.0),
+                                      borderSide: new BorderSide(color: Colors.grey, width:1),
+                                    )
                           ),
                           validator: (item) {
                             return item.length < 11
@@ -126,6 +158,9 @@ class _CadastroScreenState extends State<CadastroScreen> {
                             WhitelistingTextInputFormatter.digitsOnly
                           ],
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
 
                         TextFormField(
                           // autofocus: true,
@@ -138,17 +173,24 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
                             ),
+                            border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(15.0),
+                                      borderSide: new BorderSide(color: Colors.grey, width:1),
+                                    )
                           ),
                           validator: (item) {
                             return item.length > 6
                                 ? null
-                                : "Sua senha deve ter, no mínimo 6 caracteres!";
+                                : "Sua senha deve ter no mínimo 6 caracteres!";
                           },
                           onChanged: (item) {
                             setState(() {
                               _password = item;
                             });
                           },
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
 
                         TextFormField(
@@ -160,6 +202,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
                             ),
+                            border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(15.0),
+                                      borderSide: new BorderSide(color: Colors.grey, width:1),
+                                    )
+                            
                           ),
                           validator: (item) {
                             return item.contains("@")
@@ -173,11 +220,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
                           },
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
 
                         Container(
-                          height: 60,
+                          height: 50,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -185,22 +232,29 @@ class _CadastroScreenState extends State<CadastroScreen> {
                               end: Alignment.bottomRight,
                               stops: [0.3, 1],
                               colors: [
-                                Colors.red,
-                                Colors.redAccent,
+                                Colors.red[500],
+                                Colors.redAccent[400],
                               ],
                             ),
                             borderRadius: BorderRadius.all(
-                              Radius.circular(5),
+                              Radius.circular(15),
                             ),
                           ),
                           child: SizedBox.expand(
                             child: FlatButton(
                               child: Text(
-                                "Cadastrar",
+                                "CADASTRAR",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontSize: 27,
+                                  shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Color.fromARGB(185, 10, 10, 8)
+                                        ),
+                                      ]
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -210,6 +264,40 @@ class _CadastroScreenState extends State<CadastroScreen> {
                             ),
                           ),
                         ),
+                        
+                        SizedBox(height: 20),
+                        Container(height: 50,
+                              alignment: Alignment.center,
+                              //Botao
+                                // ignore: missing_required_param
+                                child: FlatButton(
+                                  child: Text("Cadastre-se com o Google.", textAlign: TextAlign.left, style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.black45,
+                                    shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(0.5,0.5),
+                                          blurRadius: 1.0,
+                                          color: Colors.grey
+                                        ),
+                                      ]
+                                  )),
+                                ),
+                                decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color:Colors.grey, width:1),
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(image: AssetImage('assets/icon_google.png'),
+                                fit: BoxFit.fitHeight,
+                                
+                                alignment: Alignment(-0.9,0.5)),
+
+                                
+                                
+
+                              ),
+                              
+                              ),
                       ],
                     ),
                   ),
