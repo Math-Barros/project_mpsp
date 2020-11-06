@@ -1,16 +1,52 @@
-# Projeto MPSP
+<p align="center">
+   <img src="./assets/logo-launcher.png" alt="MPSP" width="280"/>
+</p>
 
-Aplicação Mobile desenvolvida em Flutter
+<p align="center">	
+   <a href="https://www.linkedin.com/in/matheus-barros-a1646715a/">
+      <img alt="Matheus Barros" src="https://img.shields.io/badge/-Matheus Barros-red?style=flat&logo=Linkedin&logoColor=white" />
+   </a>
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Math-Barros/proffy?color=red">
 
-## 💻 Faculdade 
+  <a href="https://github.com/Math-Barros/proffy/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/RafaelGoulartB/proffy?color=red">
+  </a> 
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-red">
+  <a href="https://github.com/Math-Barros/proffy/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/Math-Barros/proffy?color=red&logo=github">
+  </a>
+</p>
 
-Faculdade de informática e administração paulista 
+:computer: Virtual Assistant for the MPSP website.
 
-## :busts_in_silhouette: Grupo
+The team must develop and prototype virtual assistant solutions for the
+MPSP website with a standard of facilitation the citizen's contact with the ministry
+public and its sectors.
 
-- Matheus Lopes de Barros 
-- Julia de Alvarenga Monaco 
-- Anna Carolina Neves Favaretto  
-- Ahalan Bessa Windson 
-- Felipe Menezes de Paiva 
+## :sparkles: Technologies
+
+This project was developed with the following technologies:
+
+- [Dart](https://dart.dev/)
+- [Flutter](https://flutter.dev/)
+
+## Team
+
+- [Matheus Lopes de Barros](https://github.com/Math-Barros) 
+- [Julia de Alvarenga Monaco](https://github.com/juliamonaco)
+- [Giullia Lazaro Zacarias](https://github.com/gzacarias)
+- [Felipe Menezes de Paiva](https://github.com/DevFelipe-Mene)
+- [Anna Carolina Neves Favaretto]()
+- [Ahalan Bessa Windson ]()
+
+---
+
+Developed by [Matheus Barros](https://github.com/Math-Barros) and [Julia Monaco](https://github.com/juliamonaco)
+
+# :closed_book: License
+
+Released in 2020 :closed_book: License
+
+This project is under the [MIT license](./LICENSE).
+
 
