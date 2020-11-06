@@ -2,6 +2,8 @@
    <img src="./assets/logo-launcher.png" alt="MPSP" width="280"/>
 </p>
 
+---
+
 <p align="center">	
    <a href="https://www.linkedin.com/in/matheus-barros-a1646715a/">
       <img alt="Matheus Barros" src="https://img.shields.io/badge/-Matheus Barros-red?style=flat&logo=Linkedin&logoColor=white" />
@@ -29,15 +31,16 @@ This project was developed with the following technologies:
 
 - [Dart](https://dart.dev/)
 - [Flutter](https://flutter.dev/)
+- [Firebase](https://firebase.google.com/?hl=pt-br)
 
-## Team
+## :busts_in_silhouette: Team
 
 - [Matheus Lopes de Barros](https://github.com/Math-Barros) 
 - [Julia de Alvarenga Monaco](https://github.com/juliamonaco)
 - [Giullia Lazaro Zacarias](https://github.com/gzacarias)
 - [Felipe Menezes de Paiva](https://github.com/DevFelipe-Mene)
 - [Anna Carolina Neves Favaretto]()
-- [Ahalan Bessa Windson ]()
+- [Ahalan Bessa Windson ](https://github.com/dasij)
 
 ---
 
